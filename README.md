@@ -35,27 +35,27 @@ GA4 README template.
 
 ### 3: A TrimGalore container, its help info, and three options
 
-*Answer*: The container link (URI) is:
+*Answer*: The container link (URI) is: [oras://community.wave.seqera.io/library/trim-galore:2.3.0--a56e49e832976df4](oras://community.wave.seqera.io/library/trim-galore:2.3.0--a56e49e832976df4)
 
 Code to run `trim_galore --help` with the container:
 
 ``` bash
-# Your command:
+# Your command: apptainer exec oras://community.wave.seqera.io/library/trim-galore:2.3.0--a56e49e832976df4 trim_galore --help
 ```
 
 <!-- You don't need to paste the TrimGalore help output -->
 
-*Answer*: The option to indicate that the reads are paired-end:
+*Answer*: The option to indicate that the reads are paired-end: --paired
 
-*Answer*: The option to set the output dir:
+*Answer*: The option to set the output dir: -o, --output_dir
 
-*Answer*: The option to run FastQC on the trimmed FASTQ files:
+*Answer*: The option to run FastQC on the trimmed FASTQ files: --fastqc
 
 ### 4: Default thresholds
 
-*Answer*: A) The default base quality score threshold:
+*Answer*: A) The default base quality score threshold: 20
 
-*Answer*: B) The default read length threshold:
+*Answer*: B) The default read length threshold: 20
 
 ### 5: Write the `trimgalore.sh` script
 
@@ -66,51 +66,61 @@ Code to run `trim_galore --help` with the container:
 Code to run the script:
 
 ``` bash
-# Your command:
+# Your command: bash scripts/trimgalore.sh \
+    ../garrigos/fastq/S63_R1.fastq.gz \
+    ../garrigos/fastq/S63_R2.fastq.gz \
+    results/trimgalore
 ```
-
-<!-- You don't need to paste the TrimGalore logging output -->
 
 Code to list the output files:
 
 ``` bash
-# Your command:
+# Your command: ls -lh results/trimgalore/
 ```
 
 The output of the command was:
 
 ```         
+total 50M
+-rw-rw----+ 1 abhijith12 PAS3493 2.6K Oct 23 14:46 S63_R1.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.3K Oct 23 14:46 S63_R1.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 288K Oct 23 14:46 S63_R1_val_1_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 355K Oct 23 14:46 S63_R1_val_1_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  25M Oct 23 14:46 S63_R1_val_1.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.3K Oct 23 14:46 S63_R2.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.4K Oct 23 14:46 S63_R2.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 274K Oct 23 14:47 S63_R2_val_2_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 334K Oct 23 14:47 S63_R2_val_2_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  25M Oct 23 14:46 S63_R2_val_2.fq.gz
 ```
 
-*Answer*: What each type of output file contains:
-
-<!-- If your script failed at first: describe the problem and your fix here. -->
+*Answer*: What each type of output file contains: The output file contains trimmed , gzip-compressed FASTQ files for R1 and R2, JSONtrimming reports for each read, HTML and ZIP FASTQC trimmed reads. The FASTQ files contain processed sequences and trimming reports.
 
 ### 7: Trimming results
 
-*Answer*: Which adapter sequence TrimGalore looked for, and how it decided on this:
+*Answer*: Which adapter sequence TrimGalore looked for, and how it decided on this: The adapter sequence it looked for is 'AGATCGGAAGAGC'. Trimgalore may have looked automatically detected the adapter and help output also says automatic detection is supported.
 
-*Answer*: Percentage of reads with adapters in R1 and R2:
+*Answer*: Percentage of reads with adapters in R1 and R2: 13 % and 10.1 % respectively.
 
-*Answer*: In R1 and R2, were more bases removed by quality trimming or by adapter trimming?
+*Answer*: In R1 and R2, were more bases removed by quality trimming or by adapter trimming?Quality trimming
 
-*Answer*: Percentage of read pairs that were removed:
+*Answer*: Percentage of read pairs that were removed: 7.4%
 
 ### 8: Poly-G trimming
 
-*Answer*: Did TrimGalore do poly-G trimming, and did you have to tell it to?
+*Answer*: Did TrimGalore do poly-G trimming, and did you have to tell it to? Yes. Poly -G trimming was enabled automatically.
 
-*Answer*: What TrimGalore concludes about the sequencing technology:
+*Answer*: What TrimGalore concludes about the sequencing technology: It concludes that reads had 2-colour sequencer artifact.
 
-*Answer*: Was more poly-G trimming done in R1 or R2? (Optional: any idea why?)
+*Answer*: Was more poly-G trimming done in R1 or R2? (Optional: any idea why?) More poly-G trimming was done in R2. Maybe R2 will be having lower sequencing quality than R1 resulting in more poly-G trimming.
 
 ### 9: Compare the FastQC reports before and after trimming
 
-*Answer*: At least two differences between the reports, and whether things look better in terms of pass/warn/fail status:
+*Answer*: At least two differences between the reports, and whether things look better in terms of pass/warn/fail status: The number of reads decreased from 500,000 to 462,984 after trim galore processing. Another difference noted was that Per-base N content improved from warning to pass and over represented sequences changed from fail to pass.Per-base sequence quality and per-sequence quality score passed before and after trimming. Howevver, per-base sequence content and per-sequence GC content continued to fail and sequence length distribution remained at warning status.
 
-*Answer*: Were the short reads with only `N`s removed? If so, was that due to the length threshold, or something else?
+*Answer*: Were the short reads with only `N`s removed? If so, was that due to the length threshold, or something else? The short reads containing Ns appear to be removed after trimming. The reason for this could be the length threshold of 20 bp. The sequences removed because of too many N bases is 0. So the reads were likely removed because of length threshold.
 
-*Answer*: Something you didn't expect or are confused about:
+*Answer*: Something you didn't expect or are confused about: Why still certain status is still in fail and not improved.
 
 ------------------------------------------------------------------------
 
