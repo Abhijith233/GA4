@@ -8,6 +8,14 @@ r1_fastq="$1"
 r2_fastq="$2"
 output_dir="$3"
 
+# Check that both input FASTQ files exist.
+for fastq in "$r1_fastq" "$r2_fastq"; do
+    if [[ ! -f "$fastq" ]]; then
+        echo "Error: input FASTQ file '$fastq' does not exist" >&2
+        exit 1
+    fi
+done
+
 # Container containing TrimGalore.
 container="oras://community.wave.seqera.io/library/trim-galore:2.3.0--a56e49e832976df4"
 
