@@ -1,18 +1,3 @@
-```{=html}
-<!--
-GA4 README template.
-- Add your answers to each question's section below.
-- For each question where we want you to add your commands,
-  put the command(s) you ran in the terminal in the corresponding ```bash code block.
-- Where we want to see a command's output, there is a plain ``` code block
-  right below the command block: paste the output there.
-- You don't need to paste the contents of your scripts into this file:
-  we will look at the scripts in your `scripts` dir directly
-  (so make sure you commit them!).
-- Delete instructional comments like this one as you go.
--->
-```
-
 # GA4 answers - <Abhijith Anil>
 
 ------------------------------------------------------------------------
@@ -21,17 +6,11 @@ GA4 README template.
 
 ### 1: Create subdirs, and copy `CLAUDE.md` and a FastQC report
 
-<!-- No command/output needed. -->
-
 ### 2: Initialize a Git repository, and commit your first files
-
-<!-- No command/output needed here -- we check the repo directly. -->
 
 ------------------------------------------------------------------------
 
 ## Part B: A TrimGalore script --- without genAI
-
-<!-- Reminder: no genAI in this Part! -->
 
 ### 3: A TrimGalore container, its help info, and three options
 
@@ -42,8 +21,6 @@ Code to run `trim_galore --help` with the container:
 ``` bash
 # Your command: apptainer exec oras://community.wave.seqera.io/library/trim-galore:2.3.0--a56e49e832976df4 trim_galore --help
 ```
-
-<!-- You don't need to paste the TrimGalore help output -->
 
 *Answer*: The option to indicate that the reads are paired-end: --paired
 
@@ -58,8 +35,6 @@ Code to run `trim_galore --help` with the container:
 *Answer*: B) The default read length threshold: 20
 
 ### 5: Write the `trimgalore.sh` script
-
-<!-- No need to paste the script: we'll look at scripts/trimgalore.sh directly. -->
 
 ### 6: Run the script for sample `S63`, and check the output files
 
@@ -116,7 +91,7 @@ total 50M
 
 ### 9: Compare the FastQC reports before and after trimming
 
-*Answer*: At least two differences between the reports, and whether things look better in terms of pass/warn/fail status: The number of reads decreased from 500,000 to 462,984 after trim galore processing. Another difference noted was that Per-base N content improved from warning to pass and over represented sequences changed from fail to pass.Per-base sequence quality and per-sequence quality score passed before and after trimming. Howevver, per-base sequence content and per-sequence GC content continued to fail and sequence length distribution remained at warning status.
+*Answer*: At least two differences between the reports, and whether things look better in terms of pass/warn/fail status: The number of reads decreased from 500,000 to 462,984 after trim galore processing. Another difference noted was that Per-base N content improved from warning to pass and over represented sequences changed from fail to pass.Per-base sequence quality and per-sequence quality score passed before and after trimming. However, per-base sequence content and per-sequence GC content continued to fail and sequence length distribution remained at warning status.
 
 *Answer*: Were the short reads with only `N`s removed? If so, was that due to the length threshold, or something else? The short reads containing Ns appear to be removed after trimming. The reason for this could be the length threshold of 20 bp. The sequences removed because of too many N bases is 0. So the reads were likely removed because of length threshold.
 
@@ -125,8 +100,6 @@ total 50M
 ------------------------------------------------------------------------
 
 ## Part C: Bring in genAI
-
-<!-- Export the conversations for questions 10, 11, 13, and 14 to `doc/ai`. -->
 
 ### 10: Sonnet reviews your script
 
@@ -372,12 +345,10 @@ S69 4.81%
 
 ### 19: Reflection
 
-*Answer*:
+*Answer*: Using Claude was helpful throughout. It helps how to write and review shell scripts and also helps with trouble shooting errors. One challenge was to ensure that Claude suggestions matches with directory filenames and structure. Overall Claude was more helpful with clearer explanations and understanding results.
 
 ------------------------------------------------------------------------
 
 ## Part D: Publish your repo on GitHub
 
 ### 20: Create a GitHub repository, push, and create an Issue
-
-<!-- No command/output needed here -- we check your GitHub repo directly. -->
