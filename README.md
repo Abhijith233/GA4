@@ -364,13 +364,11 @@ S69 4.81%
 
 ### 17: Document your genAI use
 
-<!-- No command/output needed here -- we check your `doc/ai` dir in the repo directly. -->
-
 ### 18: Update your `CLAUDE.md`
 
-*Answer*: What you added to `CLAUDE.md`, and why:
+*Answer*: What you added to `CLAUDE.md`, and why: I added two instructions, preserve the existing script workflow unless changes are necessary, and explain why changes are needed and verify that suggested shell commands match the specified files, paths, and number of samples without claiming to have tested commands that were not run. I added these changes to make claude more accurate and consistent.
 
-*Answer*: Did Claude follow the new instruction?
+*Answer*: Did Claude follow the new instruction? Yes claude followed the instructions.
 
 ### 19: Reflection
 
