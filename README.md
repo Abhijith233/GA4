@@ -213,61 +213,154 @@ Error: input FASTQ file '../garrigos/fastq/S987_R1.fastq.gz' does not exist
 The loop that Claude wrote:
 
 ``` bash
-# Paste Claude's loop here
+# Paste Claude's loop here: for r1_fastq in ../garrigos/fastq/S6*_R1.fastq.gz; do
+    r2_fastq="${r1_fastq/_R1/_R2}"
+    bash scripts/trimgalore.sh "$r1_fastq" "$r2_fastq" results/trimgalore
+done
 ```
 
-*Answer*: Does it run the script once per sample?
+*Answer*: Does it run the script once per sample? Yes the loop runs once per sample.
 
-*Answer*: Does it get the correct R2 file for each R1 file?
+*Answer*: Does it get the correct R2 file for each R1 file? Yes. The exapansion r2_fastq="\${r1_fastq/\_R1/\_R2} replaces R1 with R2 to obtain corresponding file name.
 
-*Answer*: Does it only run for the 7 `S6` samples?
+*Answer*: Does it only run for the 7 `S6` samples? The pattern should run for seven samples.
 
-*Answer*: Did you change the loop? If so, what did you change and why?
+*Answer*: Did you change the loop? If so, what did you change and why? I did not change the loop.
 
 ### 15: Test and run the loop
 
 The loop with `echo`, to test it:
 
 ``` bash
-# Your loop:
+# Your loop: for r1_fastq in ../garrigos/fastq/S6*_R1.fastq.gz; do
+    r2_fastq="${r1_fastq/_R1/_R2}"
+    echo bash scripts/trimgalore.sh "$r1_fastq" "$r2_fastq" results/trimgalore
+done
 ```
 
 The output of the loop was:
 
 ```         
+bash scripts/trimgalore.sh ../garrigos/fastq/S63_R1.fastq.gz ../garrigos/fastq/S63_R2.fastq.gz results/trimgalore
+bash scripts/trimgalore.sh ../garrigos/fastq/S64_R1.fastq.gz ../garrigos/fastq/S64_R2.fastq.gz results/trimgalore
+bash scripts/trimgalore.sh ../garrigos/fastq/S65_R1.fastq.gz ../garrigos/fastq/S65_R2.fastq.gz results/trimgalore
+bash scripts/trimgalore.sh ../garrigos/fastq/S66_R1.fastq.gz ../garrigos/fastq/S66_R2.fastq.gz results/trimgalore
+bash scripts/trimgalore.sh ../garrigos/fastq/S67_R1.fastq.gz ../garrigos/fastq/S67_R2.fastq.gz results/trimgalore
+bash scripts/trimgalore.sh ../garrigos/fastq/S68_R1.fastq.gz ../garrigos/fastq/S68_R2.fastq.gz results/trimgalore
+bash scripts/trimgalore.sh ../garrigos/fastq/S69_R1.fastq.gz ../garrigos/fastq/S69_R2.fastq.gz results/trimgalore
 ```
 
-<!-- You don't need to paste the output of the loop that ran TrimGalore -->
-
 ``` bash
-# Your command(s) to check the output files:
+# Your command(s) to check the output files:ls -lh results/trimgalore/
 ```
 
 The output of the command(s) was:
 
 ```         
+total 364M
+-rw-rw----+ 1 abhijith12 PAS3493 2.6K Oct 23 17:39 S63_R1.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.3K Oct 23 17:39 S63_R1.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 288K Oct 23 17:39 S63_R1_val_1_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 355K Oct 23 17:39 S63_R1_val_1_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  25M Oct 23 17:39 S63_R1_val_1.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.3K Oct 23 17:39 S63_R2.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.4K Oct 23 17:39 S63_R2.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 274K Oct 23 17:39 S63_R2_val_2_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 334K Oct 23 17:39 S63_R2_val_2_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  25M Oct 23 17:39 S63_R2_val_2.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.7K Oct 23 17:39 S64_R1.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.4K Oct 23 17:39 S64_R1.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 285K Oct 23 17:39 S64_R1_val_1_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 351K Oct 23 17:39 S64_R1_val_1_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  26M Oct 23 17:39 S64_R1_val_1.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.4K Oct 23 17:39 S64_R2.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.5K Oct 23 17:39 S64_R2.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 274K Oct 23 17:39 S64_R2_val_2_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 335K Oct 23 17:39 S64_R2_val_2_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  26M Oct 23 17:39 S64_R2_val_2.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.8K Oct 23 17:39 S65_R1.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.5K Oct 23 17:39 S65_R1.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 285K Oct 23 17:39 S65_R1_val_1_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 352K Oct 23 17:39 S65_R1_val_1_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  26M Oct 23 17:39 S65_R1_val_1.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 3.3K Oct 23 17:39 S65_R2.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 3.1K Oct 23 17:39 S65_R2.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 282K Oct 23 17:39 S65_R2_val_2_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 345K Oct 23 17:39 S65_R2_val_2_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  27M Oct 23 17:39 S65_R2_val_2.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.6K Oct 23 17:39 S66_R1.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.3K Oct 23 17:39 S66_R1.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 285K Oct 23 17:39 S66_R1_val_1_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 350K Oct 23 17:39 S66_R1_val_1_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  26M Oct 23 17:39 S66_R1_val_1.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.4K Oct 23 17:39 S66_R2.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.4K Oct 23 17:39 S66_R2.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 274K Oct 23 17:39 S66_R2_val_2_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 334K Oct 23 17:39 S66_R2_val_2_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  26M Oct 23 17:39 S66_R2_val_2.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.6K Oct 23 17:40 S67_R1.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.3K Oct 23 17:40 S67_R1.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 285K Oct 23 17:40 S67_R1_val_1_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 350K Oct 23 17:40 S67_R1_val_1_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  26M Oct 23 17:40 S67_R1_val_1.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.5K Oct 23 17:40 S67_R2.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.5K Oct 23 17:40 S67_R2.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 274K Oct 23 17:40 S67_R2_val_2_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 335K Oct 23 17:40 S67_R2_val_2_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  27M Oct 23 17:40 S67_R2_val_2.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.6K Oct 23 17:40 S68_R1.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.3K Oct 23 17:40 S68_R1.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 289K Oct 23 17:40 S68_R1_val_1_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 359K Oct 23 17:40 S68_R1_val_1_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  26M Oct 23 17:40 S68_R1_val_1.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.3K Oct 23 17:40 S68_R2.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.4K Oct 23 17:40 S68_R2.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 282K Oct 23 17:40 S68_R2_val_2_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 347K Oct 23 17:40 S68_R2_val_2_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  26M Oct 23 17:40 S68_R2_val_2.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.7K Oct 23 17:40 S69_R1.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.3K Oct 23 17:40 S69_R1.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 286K Oct 23 17:40 S69_R1_val_1_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 352K Oct 23 17:40 S69_R1_val_1_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  25M Oct 23 17:40 S69_R1_val_1.fq.gz
+-rw-rw----+ 1 abhijith12 PAS3493 2.5K Oct 23 17:40 S69_R2.fastq.gz_trimming_report.json
+-rw-rw----+ 1 abhijith12 PAS3493 2.5K Oct 23 17:40 S69_R2.fastq.gz_trimming_report.txt
+-rw-rw----+ 1 abhijith12 PAS3493 274K Oct 23 17:40 S69_R2_val_2_fastqc.html
+-rw-rw----+ 1 abhijith12 PAS3493 335K Oct 23 17:40 S69_R2_val_2_fastqc.zip
+-rw-rw----+ 1 abhijith12 PAS3493  26M Oct 23 17:40 S69_R2_val_2.fq.gz
 ```
 
-*Answer*: Are all 7 samples represented?
+*Answer*: Are all 7 samples represented? Yes.
 
 ### 16: A summary command
 
-*Answer*: Your prompt:
+*Answer*: Your prompt: Give me a simple command that prints , for each sample, the percentage of read pairs that Trim Galore removed, based on the output files in results/trimgalore. I'm a shell beginner , so only use basic commands like grep, cut and for loops.
 
 ``` bash
-# The command you got from Claude:
+# The command you got from Claude: for report in results/trimgalore/*_R2.fastq.gz_trimming_report.txt; do
+    sample=$(basename "$report" | cut -d "_" -f 1)
+    percent=$(grep "sequence pairs removed" "$report" | cut -d "(" -f 2 | cut -d ")" -f 1)
+    echo "$sample $percent"
+done
 ```
 
 The output of the command was:
 
 ```         
+S63 7.40%
+S64 3.35%
+S65 1.94%
+S66 3.71%
+S67 1.78%
+S68 2.56%
+S69 4.81%
 ```
 
-*Answer*: Did the output look right? If not, what did you do?
+*Answer*: Did the output look right? If not, what did you do? Ye the output looked correct, the command produced a percentage of read pairs removed for seven samples.
 
-*Answer*: Does the value for `S63` match your answer to question 7?
+*Answer*: Does the value for `S63` match your answer to question 7? Yes it matches with question & which 7.4%.
 
-*Answer*: In your own words, how does the command work?
+*Answer*: In your own words, how does the command work? The command loops through report files and uses grep to get relevant details about read pairs and uses cut to isolate the percentage and gives the value.
 
 ### 17: Document your genAI use
 

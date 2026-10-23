@@ -1,0 +1,30 @@
+
+❯ <ide_opened_file>The user opened the file
+  /fs/ess/PAS3493/people/abhijith12/GA4/scripts/trimgalore.sh in the IDE. This
+  may or may not be related to the current task.</ide_opened_file>
+
+❯ Review scripts/trimgalore.sh for correctness and robustness. List the 5 most
+  important problems or improvements, most important first, with a one-sentence
+  reason for each. Do not modify any files yet. Keep the existing script
+  structure and explain your recommendations.
+
+  Read 1 file (ctrl+o to expand)
+  ⎿  Loaded GA4/CLAUDE.md
+
+● Top 5 issues, most important first:
+
+  1. No mkdir -p "$output_dir" — CLAUDE.md requires creating output dirs before
+     writing; trim_galore --output_dir will fail if the directory doesn't exist
+     yet.
+  2. No usage comment line — project convention requires a # Usage: bash
+     scripts/trimgalore.sh ... line under the purpose block; missing here.
+  3. Variable naming/case convention not followed exactly — container should be
+     uppercase (CONTAINER=) since it's a constant, per the stated convention
+     that only constants use uppercase.
+  4. No version/success/date reporting at the end — convention requires
+     reporting the program version and completion date at the end; script only
+     prints "TrimGalore finished" with no version or timestamp, and no
+     start-date is reported either.
+  5. No validation that inputs look sane — e.g., no check that r1_fastq/r2_fastq
+     exist before invoking the container; a typo'd path would produce a
+     confusing Apptainer/TrimGalore error rather than a clear failure message.
