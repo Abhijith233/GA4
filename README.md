@@ -1,4 +1,4 @@
-# GA4 answers - <Abhijith Anil>
+# GA4 answers - Abhijith Anil
 
 ------------------------------------------------------------------------
 
